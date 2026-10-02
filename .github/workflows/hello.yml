@@ -7,12 +7,12 @@ jobs:
     steps:
       - run: echo "Hello ${{ github.actor }}, branch ${{ github.ref_name }}"
       - name: Is my code here
-      - run: ls -la
+        run: ls -la
       - uses: actions/checkout@v4
       - name: how now?
-      - run: ls -la
+        run: ls -la
       - name: Multiliner shell
-      - run: |
+        run: |
         echo "sha: ${{ github.sha }}"
         date
      
