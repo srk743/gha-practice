@@ -13,6 +13,6 @@ jobs:
         run: ls -la
       - name: Multiliner shell
         run: |
-        echo "sha: ${{ github.sha }}"
-        date
+          echo "sha: ${{ github.sha }}"
+          date
      
