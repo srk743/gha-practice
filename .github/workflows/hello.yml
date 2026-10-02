@@ -12,7 +12,7 @@ jobs:
       - name: how now?
       - run: ls -la
       - name: Multiliner shell
-      - run:|
+      - run: |
         echo "sha: ${{ github.sha }}"
         date
      
