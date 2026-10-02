@@ -1,0 +1,18 @@
+name: Hello
+on: [push,workflow_dispatch]
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello ${{ github.actor }}, branch ${{ github.ref_name }}"
+      - name: Is my code here
+      - run: ls -la
+      - uses: actions/checkout@v4
+      - name: how now?
+      - run: ls -la
+      - name: Multiliner shell
+      - run:|
+        echo "sha: ${{ github.sha }}"
+        date
+     
