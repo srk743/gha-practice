@@ -3,12 +3,13 @@ on: [push,workflow_dispatch]
 
 env:
   APP_NAME: gha-pratise
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo " Application name: $APP_NAME"
+      - run: echo "Application name $APP_NAME"
 
   build:
     needs: test
