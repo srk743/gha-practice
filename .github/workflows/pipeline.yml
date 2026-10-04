@@ -1,0 +1,51 @@
+name: pipeline
+on: [push,workflow_dispatch]
+
+env:
+  APP_NAME: gha-pratise
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo " Application name: $APP_NAME"
+
+  build:
+    needs: test
+    runs-on: unbuntu-latest
+    outputs:
+      version: ${{ steps.ver.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: ver
+        run: echo "Version=1.0.${{ github.run_number }}" >> "$GITHIB_OUTPUT"
+      - run: mkdir dist & echo "Building app version ${{ steps.ver.outputs.version }}" > dist/build.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: /dist
+
+    deploy:
+      need: build
+      if: github.ref = 'ref/heads/main'
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/download-artifact@v4
+          with:
+            name: dist
+        - run: cat build.txt
+        - name: Use secrets
+          env:
+            TOKEN: ${{ secrects.DEMO_TOKEN }}
+          run: echo "lenth of the token ${#TOKEN}"  
+        - run: echo "Deploying build version ${{ needs.build.outputs.version }}
+
+    notify:
+      needs: [ test, build, deploy ]
+      if: always()
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo "Deploy result is ${{ needs.deploy.result }}"
+
+
+
