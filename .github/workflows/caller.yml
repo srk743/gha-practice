@@ -1,0 +1,10 @@
+name: caller
+on: workflow_dispatch
+
+jobs:
+  say-hi:
+    uses: ./.github/workflows/greet.yml
+    with:
+      who: SRE team
+
+
