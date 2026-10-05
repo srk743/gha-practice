@@ -7,6 +7,6 @@ on:
         type: string
 
 jobs:
-  runs-on: ubutu-latest
+  runs-on: ubuntu-latest
   steps:
     - run: echo "Hello ${{ inputs.who }}"
